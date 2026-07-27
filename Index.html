@@ -1260,6 +1260,462 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* ========================================= */
+        /* SCROLL PROGRESS BAR                       */
+        /* ========================================= */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #E07050, #FF7A4F, #C9593A);
+            z-index: 99999;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px rgba(224, 112, 80, 0.5);
+        }
+
+        /* ========================================= */
+        /* MARQUEE / INFINITE SCROLL                 */
+        /* ========================================= */
+        .marquee-wrapper {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .marquee-wrapper::before,
+        .marquee-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .marquee-wrapper::before {
+            left: 0;
+            background: linear-gradient(90deg, #0A0A0A, transparent);
+        }
+
+        .marquee-wrapper::after {
+            right: 0;
+            background: linear-gradient(-90deg, #0A0A0A, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 3rem;
+            animation: marqueeScroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-track-reverse {
+            animation-direction: reverse;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .marquee-item:hover {
+            border-color: rgba(224, 112, 80, 0.4);
+            background: rgba(224, 112, 80, 0.05);
+            transform: scale(1.05);
+        }
+
+        .marquee-item i {
+            font-size: 1.8rem;
+            color: #E07050;
+        }
+
+        .marquee-item span {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        /* Client logos marquee */
+        .client-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 2.5rem;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .client-logo:hover {
+            border-color: rgba(224, 112, 80, 0.3);
+            background: rgba(224, 112, 80, 0.05);
+        }
+
+        .client-logo i {
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.3);
+            transition: color 0.3s ease;
+        }
+
+        .client-logo:hover i {
+            color: #E07050;
+        }
+
+        /* ========================================= */
+        /* CHATBOT WIDGET                             */
+        /* ========================================= */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #E07050, #C9593A);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            cursor: pointer;
+            z-index: 9996;
+            border: none;
+            box-shadow: 0 8px 25px rgba(224, 112, 80, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 12px 35px rgba(224, 112, 80, 0.5);
+        }
+
+        .chatbot-toggle .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            background: #22c55e;
+            border-radius: 50%;
+            border: 2px solid #0A0A0A;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-panel {
+            position: fixed;
+            bottom: 170px;
+            right: 30px;
+            width: 370px;
+            max-height: 500px;
+            background: rgba(15, 15, 15, 0.98);
+            border: 1px solid rgba(224, 112, 80, 0.2);
+            border-radius: 24px;
+            z-index: 9995;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .chatbot-panel.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #E07050, #C9593A);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header h4 {
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .chatbot-header .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .chatbot-close:hover {
+            opacity: 1;
+        }
+
+        .chatbot-body {
+            padding: 1.5rem;
+            max-height: 320px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chatbot-body::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chatbot-body::-webkit-scrollbar-thumb {
+            background: rgba(224, 112, 80, 0.3);
+            border-radius: 2px;
+        }
+
+        .chat-message {
+            max-width: 85%;
+            padding: 0.75rem 1rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .chat-message.bot {
+            background: rgba(224, 112, 80, 0.1);
+            border: 1px solid rgba(224, 112, 80, 0.15);
+            color: rgba(255, 255, 255, 0.85);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-message.user {
+            background: linear-gradient(135deg, #E07050, #C9593A);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chatbot-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .chatbot-footer input {
+            flex: 1;
+            padding: 0.65rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chatbot-footer input:focus {
+            border-color: #E07050;
+        }
+
+        .chatbot-footer input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .chatbot-send {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #E07050, #C9593A);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .chatbot-send:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-quick-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .chat-quick-btn {
+            padding: 0.4rem 0.8rem;
+            background: rgba(224, 112, 80, 0.1);
+            border: 1px solid rgba(224, 112, 80, 0.2);
+            border-radius: 50px;
+            color: #E07050;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .chat-quick-btn:hover {
+            background: rgba(224, 112, 80, 0.2);
+            border-color: #E07050;
+        }
+
+        @media (max-width: 640px) {
+            .chatbot-panel {
+                right: 10px;
+                left: 10px;
+                width: auto;
+                bottom: 140px;
+            }
+            .chatbot-toggle {
+                bottom: 80px;
+                right: 20px;
+            }
+        }
+
+        /* ========================================= */
+        /* COOKIE CONSENT BANNER                     */
+        /* ========================================= */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            border-top: 1px solid rgba(224, 112, 80, 0.2);
+            padding: 1.25rem 2rem;
+            z-index: 99998;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(20px);
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        /* ========================================= */
+        /* NEWSLETTER SECTION                        */
+        /* ========================================= */
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px 0 0 50px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .newsletter-input:focus {
+            border-color: #E07050;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #E07050, #C9593A);
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .newsletter-btn:hover {
+            background: linear-gradient(135deg, #FF7A4F, #E07050);
+            box-shadow: 0 5px 20px rgba(224, 112, 80, 0.3);
+        }
+
+        /* ========================================= */
+        /* NUMBER TICKER                              */
+        /* ========================================= */
+        .ticker-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .ticker-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .ticker-value {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #E07050;
+            line-height: 1;
+        }
+
+        .ticker-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========================================= */
+        /* ADDITIONAL RESPONSIVE                     */
+        /* ========================================= */
+        @media (max-width: 768px) {
+            .ticker-value {
+                font-size: 2.5rem;
+            }
+            .chatbot-panel {
+                max-height: 400px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2523,6 +2979,139 @@
     </section>
 
     <!-- ========================================= -->
+    <!-- CLIENTS & PARTNERS MARQUEE                -->
+    <!-- ========================================= -->
+    <section class="py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <p class="section-subtitle">Trusted By</p>
+                <h2 class="section-title">Clients &amp; Partners</h2>
+            </div>
+
+            <div class="marquee-wrapper mb-8">
+                <div class="marquee-track">
+                    <div class="client-logo"><i class="fab fa-google"></i></div>
+                    <div class="client-logo"><i class="fab fa-microsoft"></i></div>
+                    <div class="client-logo"><i class="fab fa-amazon"></i></div>
+                    <div class="client-logo"><i class="fab fa-spotify"></i></div>
+                    <div class="client-logo"><i class="fab fa-shopify"></i></div>
+                    <div class="client-logo"><i class="fab fa-stripe"></i></div>
+                    <div class="client-logo"><i class="fab fa-slack"></i></div>
+                    <div class="client-logo"><i class="fab fa-dropbox"></i></div>
+                    <div class="client-logo"><i class="fab fa-trello"></i></div>
+                    <div class="client-logo"><i class="fab fa-figma"></i></div>
+                    <div class="client-logo"><i class="fab fa-twitch"></i></div>
+                    <div class="client-logo"><i class="fab fa-paypal"></i></div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="client-logo"><i class="fab fa-google"></i></div>
+                    <div class="client-logo"><i class="fab fa-microsoft"></i></div>
+                    <div class="client-logo"><i class="fab fa-amazon"></i></div>
+                    <div class="client-logo"><i class="fab fa-spotify"></i></div>
+                    <div class="client-logo"><i class="fab fa-shopify"></i></div>
+                    <div class="client-logo"><i class="fab fa-stripe"></i></div>
+                    <div class="client-logo"><i class="fab fa-slack"></i></div>
+                    <div class="client-logo"><i class="fab fa-dropbox"></i></div>
+                    <div class="client-logo"><i class="fab fa-trello"></i></div>
+                    <div class="client-logo"><i class="fab fa-figma"></i></div>
+                    <div class="client-logo"><i class="fab fa-twitch"></i></div>
+                    <div class="client-logo"><i class="fab fa-paypal"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- TECH STACK MARQUEE                        -->
+    <!-- ========================================= -->
+    <section class="py-16 relative bg-softblack-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <p class="section-subtitle">Technologies</p>
+                <h2 class="section-title">Tech Stack</h2>
+            </div>
+
+            <!-- Row 1: Left to Right -->
+            <div class="marquee-wrapper mb-6">
+                <div class="marquee-track">
+                    <div class="marquee-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+                    <div class="marquee-item"><i class="fab fa-python"></i><span>Python</span></div>
+                    <div class="marquee-item"><i class="fab fa-react"></i><span>React.js</span></div>
+                    <div class="marquee-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+                    <div class="marquee-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+                    <div class="marquee-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+                    <div class="marquee-item"><i class="fas fa-database"></i><span>MongoDB</span></div>
+                    <div class="marquee-item"><i class="fab fa-docker"></i><span>Docker</span></div>
+                    <div class="marquee-item"><i class="fab fa-aws"></i><span>AWS</span></div>
+                    <div class="marquee-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                    <!-- Duplicate for loop -->
+                    <div class="marquee-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+                    <div class="marquee-item"><i class="fab fa-python"></i><span>Python</span></div>
+                    <div class="marquee-item"><i class="fab fa-react"></i><span>React.js</span></div>
+                    <div class="marquee-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+                    <div class="marquee-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+                    <div class="marquee-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+                    <div class="marquee-item"><i class="fas fa-database"></i><span>MongoDB</span></div>
+                    <div class="marquee-item"><i class="fab fa-docker"></i><span>Docker</span></div>
+                    <div class="marquee-item"><i class="fab fa-aws"></i><span>AWS</span></div>
+                    <div class="marquee-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                </div>
+            </div>
+
+            <!-- Row 2: Right to Left -->
+            <div class="marquee-wrapper">
+                <div class="marquee-track marquee-track-reverse">
+                    <div class="marquee-item"><i class="fab fa-telegram"></i><span>Telegram API</span></div>
+                    <div class="marquee-item"><i class="fab fa-discord"></i><span>Discord.js</span></div>
+                    <div class="marquee-item"><i class="fas fa-fire"></i><span>Firebase</span></div>
+                    <div class="marquee-item"><i class="fab fa-linux"></i><span>Linux</span></div>
+                    <div class="marquee-item"><i class="fas fa-server"></i><span>Express.js</span></div>
+                    <div class="marquee-item"><i class="fab fa-npm"></i><span>NPM</span></div>
+                    <div class="marquee-item"><i class="fas fa-code"></i><span>TypeScript</span></div>
+                    <div class="marquee-item"><i class="fas fa-brain"></i><span>AI / ML</span></div>
+                    <div class="marquee-item"><i class="fas fa-shield-alt"></i><span>Cybersecurity</span></div>
+                    <div class="marquee-item"><i class="fas fa-cloud"></i><span>Vercel</span></div>
+                    <!-- Duplicate for loop -->
+                    <div class="marquee-item"><i class="fab fa-telegram"></i><span>Telegram API</span></div>
+                    <div class="marquee-item"><i class="fab fa-discord"></i><span>Discord.js</span></div>
+                    <div class="marquee-item"><i class="fas fa-fire"></i><span>Firebase</span></div>
+                    <div class="marquee-item"><i class="fab fa-linux"></i><span>Linux</span></div>
+                    <div class="marquee-item"><i class="fas fa-server"></i><span>Express.js</span></div>
+                    <div class="marquee-item"><i class="fab fa-npm"></i><span>NPM</span></div>
+                    <div class="marquee-item"><i class="fas fa-code"></i><span>TypeScript</span></div>
+                    <div class="marquee-item"><i class="fas fa-brain"></i><span>AI / ML</span></div>
+                    <div class="marquee-item"><i class="fas fa-shield-alt"></i><span>Cybersecurity</span></div>
+                    <div class="marquee-item"><i class="fas fa-cloud"></i><span>Vercel</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- NEWSLETTER SECTION                        -->
+    <!-- ========================================= -->
+    <section class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-10 md:p-14 text-center reveal">
+                <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-terracotta-500/20 to-terracotta-700/20 flex items-center justify-center">
+                    <i class="fas fa-envelope text-3xl text-terracotta-500"></i>
+                </div>
+                <h3 class="text-3xl font-display font-bold mb-4">Stay Updated</h3>
+                <p class="text-white/60 max-w-lg mx-auto mb-8 leading-relaxed">
+                    Subscribe to my newsletter and get the latest updates on projects, 
+                    tech tutorials, and exclusive behind-the-scenes content.
+                </p>
+                <form class="flex max-w-md mx-auto" id="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required id="newsletter-email">
+                    <button type="submit" class="newsletter-btn" id="newsletter-submit">
+                        <i class="fas fa-paper-plane mr-1"></i> Subscribe
+                    </button>
+                </form>
+                <p class="text-white/30 text-xs mt-4">No spam, unsubscribe anytime. Join 2,000+ subscribers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
     <!-- CONTACT SECTION                           -->
     <!-- ========================================= -->
     <section id="contact" class="py-24 relative">
@@ -2641,6 +3230,71 @@
             </div>
         </div>
     </section>
+
+    <!-- ========================================= -->
+    <!-- SCROLL PROGRESS BAR                       -->
+    <!-- ========================================= -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- ========================================= -->
+    <!-- CHATBOT WIDGET                            -->
+    <!-- ========================================= -->
+    <button class="chatbot-toggle" id="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-comment-dots"></i>
+        <div class="badge"></div>
+    </button>
+
+    <div class="chatbot-panel" id="chatbot-panel">
+        <div class="chatbot-header">
+            <div>
+                <h4><span class="status-dot"></span> SUDEEPBOTS Assistant</h4>
+                <p style="font-size:0.7rem;color:rgba(255,255,255,0.7);margin-top:2px;">Usually replies instantly</p>
+            </div>
+            <button class="chatbot-close" onclick="toggleChatbot()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-body" id="chatbot-body">
+            <div class="chat-message bot">
+                Hey there! 👋 I'm SUDEEPBOTS' virtual assistant. How can I help you today?
+                <div class="chat-quick-btns">
+                    <button class="chat-quick-btn" onclick="sendQuickMessage('What services do you offer?')">Services</button>
+                    <button class="chat-quick-btn" onclick="sendQuickMessage('What are your prices?')">Pricing</button>
+                    <button class="chat-quick-btn" onclick="sendQuickMessage('How can I hire you?')">Hire</button>
+                    <button class="chat-quick-btn" onclick="sendQuickMessage('Tell me about your experience')">Experience</button>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-footer">
+            <input type="text" id="chatbot-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChatMessage()">
+            <button class="chatbot-send" onclick="sendChatMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- COOKIE CONSENT BANNER                     -->
+    <!-- ========================================= -->
+    <div class="cookie-banner" id="cookie-banner">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-cookie-bite text-terracotta-500 text-2xl"></i>
+                <p class="text-white/70 text-sm">
+                    This website uses cookies to enhance your browsing experience. 
+                    By continuing, you agree to our use of cookies.
+                </p>
+            </div>
+            <div class="flex gap-3 flex-shrink-0">
+                <button class="btn-primary text-sm py-2 px-5" onclick="acceptCookies()">
+                    Accept All
+                </button>
+                <button class="btn-outline text-sm py-2 px-5" onclick="acceptCookies()">
+                    Decline
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- ========================================= -->
     <!-- FOOTER                                    -->
@@ -3532,6 +4186,362 @@
         // Parallax orbs already handled
     }, 16);
     window.addEventListener('scroll', throttledScroll);
+
+    /* ========================================= */
+    /* SCROLL PROGRESS BAR                       */
+    /* ========================================= */
+    const scrollProgressBar = document.getElementById('scroll-progress');
+
+    function updateScrollProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        if (scrollProgressBar) {
+            scrollProgressBar.style.width = scrollPercent + '%';
+        }
+    }
+
+    window.addEventListener('scroll', updateScrollProgress);
+    updateScrollProgress();
+
+    /* ========================================= */
+    /* CHATBOT WIDGET                            */
+    /* ========================================= */
+    let chatbotOpen = false;
+
+    function toggleChatbot() {
+        chatbotOpen = !chatbotOpen;
+        const panel = document.getElementById('chatbot-panel');
+        const toggle = document.getElementById('chatbot-toggle');
+        
+        if (chatbotOpen) {
+            panel.classList.add('open');
+            toggle.innerHTML = '<i class="fas fa-times"></i>';
+            toggle.querySelector('.badge')?.remove();
+        } else {
+            panel.classList.remove('open');
+            toggle.innerHTML = '<i class="fas fa-comment-dots"></i><div class="badge"></div>';
+        }
+    }
+
+    const chatResponses = {
+        'services': 'I offer Bot Development (Telegram, Discord, WhatsApp), Full Stack Web Development, API Development, AI Integration, Security Audits, and Technical Consultation. Check out the Services section for more details! 🚀',
+        'pricing': 'I have 3 plans:\n• Starter: $49/project\n• Professional: $149/project (Most Popular)\n• Enterprise: $499/project\nScroll to the Pricing section for full details! 💰',
+        'prices': 'I have 3 plans:\n• Starter: $49/project\n• Professional: $149/project (Most Popular)\n• Enterprise: $499/project\nScroll to the Pricing section for full details! 💰',
+        'hire': 'You can hire me by:\n1. Filling out the Contact form below\n2. Messaging me on Telegram: @SUDEEPBOTS\n3. Sending an email to contact@sudeepbots.dev\n\nI\'m currently available for new projects! ✅',
+        'experience': 'I have 5+ years of experience in software development:\n• Senior Bot Developer (2022-Present)\n• Full Stack Developer (2020-2022)\n• Backend Engineer (2019-2020)\n• Junior Web Developer (2018-2019)\n\n50+ projects completed for 200+ clients! 🏆',
+        'contact': 'You can reach me at:\n📧 Email: contact@sudeepbots.dev\n📱 Telegram: @SUDEEPBOTS\n🎮 Discord: SUDEEPBOTS#0001\n\nOr use the contact form below! 📬',
+        'hello': 'Hey there! 👋 Great to meet you! How can I help you today? Feel free to ask about my services, pricing, or anything else!',
+        'hi': 'Hello! 😊 Welcome to my portfolio! What would you like to know? I can tell you about my services, pricing, experience, or how to get in touch.',
+        'thanks': 'You\'re welcome! 😄 Feel free to ask if you have any more questions. Happy to help!',
+        'thank you': 'You\'re welcome! 😄 Feel free to ask if you have any more questions. Happy to help!',
+        'bot': 'I specialize in building advanced bots for:\n🤖 Telegram - AI assistants, payment bots, group managers\n🎮 Discord - Moderation, music, economy systems\n📱 WhatsApp - Business automation\n\nI\'ve built 50+ bots with 95% client satisfaction! 🔥',
+        'tech': 'My tech stack includes:\n• Languages: JavaScript, Python, TypeScript\n• Frontend: React, Next.js, HTML/CSS\n• Backend: Node.js, Express, FastAPI\n• Databases: MongoDB, PostgreSQL, Redis\n• Cloud: AWS, Vercel, Firebase\n• Tools: Docker, Git, Linux 🛠️',
+    };
+
+    function findResponse(message) {
+        const lowerMsg = message.toLowerCase();
+        for (const [key, response] of Object.entries(chatResponses)) {
+            if (lowerMsg.includes(key)) {
+                return response;
+            }
+        }
+        return 'Thanks for your message! For detailed discussions, please reach out via the Contact form or message me directly on Telegram: @SUDEEPBOTS. I\'ll get back to you ASAP! 🙌';
+    }
+
+    function addChatMessage(text, type) {
+        const body = document.getElementById('chatbot-body');
+        const msg = document.createElement('div');
+        msg.className = `chat-message ${type}`;
+        msg.textContent = text;
+        body.appendChild(msg);
+        body.scrollTop = body.scrollHeight;
+    }
+
+    function sendChatMessage() {
+        const input = document.getElementById('chatbot-input');
+        const message = input.value.trim();
+        if (!message) return;
+
+        addChatMessage(message, 'user');
+        input.value = '';
+
+        // Typing indicator
+        const body = document.getElementById('chatbot-body');
+        const typing = document.createElement('div');
+        typing.className = 'chat-message bot';
+        typing.innerHTML = '<i class="fas fa-ellipsis-h" style="animation:pulse 1s infinite;"></i>';
+        typing.id = 'typing-indicator';
+        body.appendChild(typing);
+        body.scrollTop = body.scrollHeight;
+
+        setTimeout(() => {
+            const typingEl = document.getElementById('typing-indicator');
+            if (typingEl) typingEl.remove();
+            const response = findResponse(message);
+            addChatMessage(response, 'bot');
+        }, 800 + Math.random() * 700);
+    }
+
+    function sendQuickMessage(message) {
+        const input = document.getElementById('chatbot-input');
+        input.value = message;
+        sendChatMessage();
+    }
+
+    /* ========================================= */
+    /* COOKIE CONSENT                            */
+    /* ========================================= */
+    function acceptCookies() {
+        const banner = document.getElementById('cookie-banner');
+        banner.classList.remove('show');
+        localStorage.setItem('cookiesAccepted', 'true');
+    }
+
+    // Show cookie banner after delay if not accepted
+    setTimeout(() => {
+        if (!localStorage.getItem('cookiesAccepted')) {
+            const banner = document.getElementById('cookie-banner');
+            if (banner) banner.classList.add('show');
+        }
+    }, 5000);
+
+    /* ========================================= */
+    /* NEWSLETTER FORM                           */
+    /* ========================================= */
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletter-email');
+            const submitBtn = document.getElementById('newsletter-submit');
+            const originalHtml = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Done!';
+                submitBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                showToast('Subscribed! 🎉', 'Welcome aboard! You\'ll receive updates soon.');
+
+                setTimeout(() => {
+                    emailInput.value = '';
+                    submitBtn.innerHTML = originalHtml;
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = '';
+                }, 2000);
+            }, 1200);
+        });
+    }
+
+    /* ========================================= */
+    /* MAGNETIC BUTTON EFFECT                    */
+    /* ========================================= */
+    document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
+        });
+    });
+
+    /* ========================================= */
+    /* RIPPLE EFFECT ON BUTTONS                  */
+    /* ========================================= */
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: rippleEffect 0.6s ease-out;
+                pointer-events: none;
+            `;
+            
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+
+    // Ripple keyframe (injected dynamically)
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(rippleStyle);
+
+    /* ========================================= */
+    /* TEXT SCRAMBLE EFFECT ON HOVER              */
+    /* ========================================= */
+    class TextScramble {
+        constructor(el) {
+            this.el = el;
+            this.chars = '!<>-_\/[]{}—=+*^?#________';
+            this.originalText = el.textContent;
+        }
+
+        scramble() {
+            const length = this.originalText.length;
+            let iteration = 0;
+            const maxIterations = length * 3;
+
+            const interval = setInterval(() => {
+                this.el.textContent = this.originalText
+                    .split('')
+                    .map((letter, index) => {
+                        if (index < iteration / 3) {
+                            return this.originalText[index];
+                        }
+                        return this.chars[Math.floor(Math.random() * this.chars.length)];
+                    })
+                    .join('');
+
+                if (iteration >= maxIterations) {
+                    clearInterval(interval);
+                    this.el.textContent = this.originalText;
+                }
+                iteration++;
+            }, 30);
+        }
+    }
+
+    // Apply text scramble to section titles on hover
+    document.querySelectorAll('.section-title').forEach(title => {
+        const scrambler = new TextScramble(title);
+        title.addEventListener('mouseenter', () => scrambler.scramble());
+    });
+
+    /* ========================================= */
+    /* LIGHT TRAIL EFFECT ON MOUSE MOVE          */
+    /* ========================================= */
+    let trailCount = 0;
+    const maxTrails = 20;
+
+    document.addEventListener('mousemove', throttle((e) => {
+        if (window.innerWidth < 768) return;
+        trailCount++;
+        if (trailCount % 3 !== 0) return; // Only every 3rd move
+
+        const trail = document.createElement('div');
+        trail.style.cssText = `
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: rgba(224, 112, 80, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            transition: all 0.5s ease;
+        `;
+        document.body.appendChild(trail);
+
+        setTimeout(() => {
+            trail.style.opacity = '0';
+            trail.style.transform = 'scale(0)';
+        }, 50);
+
+        setTimeout(() => trail.remove(), 600);
+    }, 16));
+
+    /* ========================================= */
+    /* AUTO-OPEN CHATBOT AFTER INACTIVITY        */
+    /* ========================================= */
+    let inactivityTimer;
+
+    function resetInactivityTimer() {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+            if (!chatbotOpen && !localStorage.getItem('chatbotAutoOpened')) {
+                toggleChatbot();
+                localStorage.setItem('chatbotAutoOpened', 'true');
+            }
+        }, 30000); // 30 seconds of inactivity
+    }
+
+    document.addEventListener('mousemove', resetInactivityTimer);
+    document.addEventListener('keydown', resetInactivityTimer);
+    document.addEventListener('scroll', resetInactivityTimer);
+    resetInactivityTimer();
+
+    /* ========================================= */
+    /* INTERSECTION OBSERVER FOR MARQUEE PAUSE   */
+    /* ========================================= */
+    document.querySelectorAll('.marquee-track').forEach(track => {
+        track.addEventListener('mouseenter', () => {
+            track.style.animationPlayState = 'paused';
+        });
+        track.addEventListener('mouseleave', () => {
+            track.style.animationPlayState = 'running';
+        });
+    });
+
+    /* ========================================= */
+    /* VISITOR COUNTER (LOCAL STORAGE)            */
+    /* ========================================= */
+    (function() {
+        let visits = parseInt(localStorage.getItem('visitCount') || '0');
+        visits++;
+        localStorage.setItem('visitCount', visits.toString());
+        if (visits > 1) {
+            console.log(`%c Welcome back! Visit #${visits} 🎉`, 'color: #E07050; font-size: 14px;');
+        }
+    })();
+
+    /* ========================================= */
+    /* NETWORK STATUS INDICATOR                  */
+    /* ========================================= */
+    window.addEventListener('online', () => {
+        showToast('Back Online! 🌐', 'Your internet connection has been restored.');
+    });
+
+    window.addEventListener('offline', () => {
+        showToast('You\'re Offline ⚠️', 'Please check your internet connection.');
+    });
+
+    /* ========================================= */
+    /* PRINT FRIENDLY STYLES                     */
+    /* ========================================= */
+    const printStyles = document.createElement('style');
+    printStyles.textContent = `
+        @media print {
+            .cursor-dot, .cursor-outline, .bg-grid, #particles-canvas,
+            .bg-orb, .scroll-top, .toast, .music-widget, .chatbot-toggle,
+            .chatbot-panel, .cookie-banner, .scroll-progress, .loader { 
+                display: none !important; 
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .section-title {
+                color: black !important;
+            }
+        }
+    `;
+    document.head.appendChild(printStyles);
     </script>
 </body>
 </html>
