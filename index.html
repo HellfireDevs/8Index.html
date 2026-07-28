@@ -7804,7 +7804,7 @@ $ _
     /* ========================================= */
     let isMusicPlaying = false;
 
-    function toggleMusic() {
+    window.toggleMusic = function() {
         isMusicPlaying = !isMusicPlaying;
         const bars = document.querySelectorAll('.music-bar');
         const label = document.getElementById('music-label');
@@ -7993,7 +7993,7 @@ $ _
     /* ========================================= */
     let chatbotOpen = false;
 
-    function toggleChatbot() {
+    window.toggleChatbot = function() {
         chatbotOpen = !chatbotOpen;
         const panel = document.getElementById('chatbot-panel');
         const toggle = document.getElementById('chatbot-toggle');
@@ -8835,7 +8835,8 @@ $ _
     /* ========================================= */
     /* WEB AUDIO SYNTHESIZER SOUND EFFECTS       */
     /* ========================================= */
-    const SoundFX = (function() {
+    const SoundFX = window.SoundFX = (function() {
+    const SoundFX_obj =
         let audioCtx = null;
         let isMuted = localStorage.getItem('soundMuted') === 'true';
 
