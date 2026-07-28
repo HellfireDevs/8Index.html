@@ -182,6 +182,8 @@
         .loader.hidden {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none !important;
+            display: none !important;
         }
 
         .loader-spinner {
@@ -2553,7 +2555,7 @@
     <!-- ========================================= -->
     <!-- LOADER                                    -->
     <!-- ========================================= -->
-    <div class="loader" id="loader">
+    <div class="loader" id="loader" style="animation: fadeOutLoader 0.5s ease 0.8s forwards;"><script>setTimeout(function(){var l=document.getElementById("loader");if(l)l.style.display="none";}, 1000);</script>
         <div class="loader-spinner"></div>
         <div class="loader-text">SUDEEPBOTS</div>
     </div>
