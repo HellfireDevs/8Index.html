@@ -161,7 +161,10 @@
         }
         
         /* ========================================= */
-        /* LOADER                                    */
+        /* TOUCH DEVICE CHECK                        */
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+
+    /* LOADER                                    */
         /* ========================================= */
         .loader {
             position: fixed;
@@ -8742,7 +8745,7 @@ $ _
     /* ========================================= */
     /* ENHANCED MOBILE TOUCH EFFECTS             */
     /* ========================================= */
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+    
     if (isTouchDevice) {
         // Disable hover-dependent features on touch devices
         document.body.classList.add('touch-device');
