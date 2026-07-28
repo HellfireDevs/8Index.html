@@ -1717,6 +1717,665 @@
                 max-height: 400px;
             }
         }
+
+        /* ========================================= */
+        /* 3D SNAKE TIMELINE ANIMATION               */
+        /* ========================================= */
+        .timeline-snake {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .timeline-snake svg {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 100%;
+        }
+
+        .snake-path {
+            fill: none;
+            stroke: url(#snakeGradient);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 8 12;
+            animation: snakeDash 2s linear infinite;
+            filter: drop-shadow(0 0 6px rgba(224, 112, 80, 0.4));
+        }
+
+        .snake-path-bg {
+            fill: none;
+            stroke: rgba(224, 112, 80, 0.08);
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        .snake-glow {
+            fill: none;
+            stroke: rgba(224, 112, 80, 0.15);
+            stroke-width: 8;
+            stroke-linecap: round;
+            filter: blur(4px);
+        }
+
+        @keyframes snakeDash {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -40; }
+        }
+
+        .snake-head {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            background: radial-gradient(circle, #FF7A4F, #E07050);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(224, 112, 80, 0.6), 0 0 30px rgba(224, 112, 80, 0.3);
+            z-index: 5;
+            transition: top 0.1s linear;
+        }
+
+        .snake-head::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 2px;
+            box-shadow: 6px 0 0 white;
+        }
+
+        .snake-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #E07050;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-snake {
+                left: 20px;
+            }
+            .snake-head {
+                left: 20px;
+            }
+            .timeline-snake svg {
+                width: 40px;
+            }
+        }
+
+        /* ========================================= */
+        /* INDIA MAP SECTION                          */
+        /* ========================================= */
+        .map-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            aspect-ratio: 1 / 1.1;
+        }
+
+        .map-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-svg .india-outline {
+            fill: rgba(224, 112, 80, 0.05);
+            stroke: rgba(224, 112, 80, 0.3);
+            stroke-width: 1.5;
+            transition: all 0.3s;
+        }
+
+        .map-svg .india-outline:hover {
+            fill: rgba(224, 112, 80, 0.1);
+        }
+
+        .map-pin {
+            position: absolute;
+            transform: translate(-50%, -100%);
+            z-index: 10;
+            cursor: pointer;
+            animation: pinBounce 2s ease infinite;
+        }
+
+        .map-pin-icon {
+            width: 40px;
+            height: 50px;
+            background: linear-gradient(135deg, #E07050, #C9593A);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(224, 112, 80, 0.4);
+        }
+
+        .map-pin-icon i {
+            transform: rotate(45deg);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .map-pin-pulse {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: rgba(224, 112, 80, 0.3);
+            border-radius: 50%;
+            animation: pinPulse 2s ease infinite;
+        }
+
+        .map-pin-label {
+            position: absolute;
+            top: -10px;
+            left: 55px;
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid rgba(224, 112, 80, 0.3);
+            border-radius: 12px;
+            padding: 0.75rem 1.25rem;
+            white-space: nowrap;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .map-pin:hover .map-pin-label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .map-pin-label h5 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: #E07050;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .map-pin-label p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.75rem;
+        }
+
+        @keyframes pinBounce {
+            0%, 100% { transform: translate(-50%, -100%); }
+            50% { transform: translate(-50%, -110%); }
+        }
+
+        @keyframes pinPulse {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.6; }
+            100% { transform: translateX(-50%) scale(3); opacity: 0; }
+        }
+
+        .map-grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(224, 112, 80, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(224, 112, 80, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            border-radius: 24px;
+        }
+
+        .map-radar {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 1px solid rgba(224, 112, 80, 0.1);
+            animation: radarPing 3s ease infinite;
+            pointer-events: none;
+        }
+
+        @keyframes radarPing {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
+        /* ========================================= */
+        /* COMPREHENSIVE MOBILE RESPONSIVE FIXES     */
+        /* ========================================= */
+        @media (max-width: 480px) {
+            html {
+                font-size: 14px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+            
+            .section-subtitle {
+                font-size: 0.7rem;
+            }
+
+            /* Hero mobile fix */
+            .hero-title {
+                font-size: 2rem !important;
+            }
+
+            /* Buttons mobile fix */
+            .btn-primary,
+            .btn-outline {
+                padding: 10px 20px;
+                font-size: 0.8rem;
+                min-width: auto;
+            }
+
+            /* Nav mobile fix */
+            .glass-card {
+                padding: 1rem;
+            }
+
+            /* About grid fix */
+            .grid {
+                gap: 1rem;
+            }
+
+            /* Project cards fix */
+            .project-card {
+                border-radius: 16px;
+            }
+
+            .project-content {
+                padding: 1rem;
+            }
+
+            /* Pricing cards mobile */
+            .pricing-card {
+                padding: 1.5rem;
+            }
+
+            /* Footer mobile */
+            footer .grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            /* Contact form mobile */
+            #contact .glass-card {
+                padding: 1.5rem;
+            }
+
+            #contact input,
+            #contact select,
+            #contact textarea {
+                font-size: 16px; /* Prevents iOS zoom on focus */
+            }
+
+            /* Scroll top button mobile */
+            .scroll-top {
+                width: 40px;
+                height: 40px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            /* Music widget mobile */
+            .music-widget {
+                bottom: 60px;
+                left: 15px;
+                padding: 0.4rem 0.8rem;
+            }
+
+            /* Chatbot mobile */
+            .chatbot-toggle {
+                width: 48px;
+                height: 48px;
+                bottom: 70px;
+                right: 15px;
+            }
+
+            /* Stats boxes mobile */
+            .stat-box {
+                padding: 1rem;
+            }
+
+            /* Map section mobile */
+            .map-container {
+                max-width: 100%;
+            }
+
+            .map-pin-icon {
+                width: 30px;
+                height: 38px;
+            }
+
+            /* Newsletter mobile */
+            #newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                border-radius: 50px;
+            }
+
+            .newsletter-btn {
+                border-radius: 50px;
+            }
+
+            /* Cookie banner mobile */
+            .cookie-banner {
+                padding: 1rem;
+            }
+
+            /* Fun facts grid mobile */
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Tablet fixes */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+
+            /* Fix buttons wrapping */
+            .flex.gap-4 {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            /* Service cards stack */
+            .grid.md\:grid-cols-2,
+            .grid.md\:grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            /* Fix horizontal scroll */
+            body {
+                overflow-x: hidden;
+            }
+
+            section {
+                overflow-x: hidden;
+            }
+
+            /* Hide cursor effects on touch devices */
+            .cursor-dot,
+            .cursor-outline {
+                display: none !important;
+            }
+
+            /* Marquee smaller on mobile */
+            .marquee-item {
+                padding: 0.75rem 1.25rem;
+            }
+
+            .marquee-item i {
+                font-size: 1.4rem;
+            }
+
+            .marquee-item span {
+                font-size: 0.8rem;
+            }
+
+            .client-logo {
+                padding: 1rem 1.5rem;
+            }
+
+            .client-logo i {
+                font-size: 1.8rem;
+            }
+
+            /* Process steps mobile */
+            .grid.lg\:grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* Hide step arrows on mobile */
+            .hidden.lg\:block {
+                display: none !important;
+            }
+
+            /* Map pin label always visible on mobile */
+            .map-pin-label {
+                opacity: 1;
+                transform: translateX(0);
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-top: 0.5rem;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 360px) {
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .btn-primary, .btn-outline {
+                padding: 8px 16px;
+                font-size: 0.75rem;
+            }
+
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card {
+                padding: 1rem;
+            }
+        }
+
+        /* Fix for iOS safe area */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .cookie-banner {
+                padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
+            }
+            .scroll-top {
+                bottom: calc(15px + env(safe-area-inset-bottom));
+            }
+            .chatbot-toggle {
+                bottom: calc(70px + env(safe-area-inset-bottom));
+            }
+        }
+
+        /* ========================================= */
+        /* COMMAND PALETTE (CTRL+K)                  */
+        /* ========================================= */
+        .cmd-palette-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            z-index: 99999;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 15vh;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cmd-palette-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cmd-palette-modal {
+            width: 90%;
+            max-width: 620px;
+            background: rgba(18, 18, 18, 0.95);
+            border: 1px solid rgba(224, 112, 80, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(224, 112, 80, 0.15);
+            overflow: hidden;
+            transform: scale(0.95) translateY(-10px);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cmd-palette-backdrop.active .cmd-palette-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .cmd-search-input-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            gap: 1rem;
+        }
+
+        .cmd-search-input-wrapper i {
+            color: #E07050;
+            font-size: 1.2rem;
+        }
+
+        .cmd-search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .cmd-search-input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .cmd-results-list {
+            max-height: 340px;
+            overflow-y: auto;
+            padding: 0.75rem;
+        }
+
+        .cmd-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1.2rem;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .cmd-item:hover, .cmd-item.selected {
+            background: rgba(224, 112, 80, 0.15);
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        .cmd-item i {
+            color: #E07050;
+            width: 24px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .cmd-item-shortcut {
+            margin-left: auto;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: monospace;
+        }
+
+        .cmd-footer {
+            padding: 0.75rem 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Keyboard hint badge in navbar */
+        .cmd-kbd-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.7rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cmd-kbd-hint:hover {
+            border-color: rgba(224, 112, 80, 0.4);
+            color: #E07050;
+        }
+
+        /* Sound Effects Indicator Floating */
+        .sound-toggle-btn {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 44px;
+            height: 44px;
+            background: rgba(20, 20, 20, 0.85);
+            border: 1px solid rgba(224, 112, 80, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 9996;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .sound-toggle-btn:hover {
+            color: #E07050;
+            border-color: #E07050;
+            transform: scale(1.1);
+        }
+
+        .sound-toggle-btn.muted {
+            opacity: 0.5;
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .sound-toggle-btn {
+                bottom: 60px;
+                left: 15px;
+            }
+            .cmd-kbd-hint {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2234,6 +2893,22 @@
             </div>
             
             <div class="timeline">
+                <!-- 3D Snake Path -->
+                <div class="timeline-snake" id="timeline-snake">
+                    <svg viewBox="0 0 60 1000" preserveAspectRatio="none" style="height:100%;">
+                        <defs>
+                            <linearGradient id="snakeGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#FF7A4F" />
+                                <stop offset="50%" stop-color="#E07050" />
+                                <stop offset="100%" stop-color="#C9593A" />
+                            </linearGradient>
+                        </defs>
+                        <path class="snake-glow" d="M30,0 C45,50 15,100 30,150 C45,200 15,250 30,300 C45,350 15,400 30,450 C45,500 15,550 30,600 C45,650 15,700 30,750 C45,800 15,850 30,900 C45,950 15,1000 30,1000" />
+                        <path class="snake-path-bg" d="M30,0 C45,50 15,100 30,150 C45,200 15,250 30,300 C45,350 15,400 30,450 C45,500 15,550 30,600 C45,650 15,700 30,750 C45,800 15,850 30,900 C45,950 15,1000 30,1000" />
+                        <path class="snake-path" d="M30,0 C45,50 15,100 30,150 C45,200 15,250 30,300 C45,350 15,400 30,450 C45,500 15,550 30,600 C45,650 15,700 30,750 C45,800 15,850 30,900 C45,950 15,1000 30,1000" />
+                    </svg>
+                    <div class="snake-head" id="snake-head"></div>
+                </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="glass-card p-6">
@@ -3406,6 +4081,190 @@
                     <div class="marquee-item"><i class="fas fa-brain"></i><span>AI / ML</span></div>
                     <div class="marquee-item"><i class="fas fa-shield-alt"></i><span>Cybersecurity</span></div>
                     <div class="marquee-item"><i class="fas fa-cloud"></i><span>Vercel</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- LOCATION / INDIA MAP SECTION              -->
+    <!-- ========================================= -->
+    <section id="location" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <p class="section-subtitle">Where I'm Based</p>
+                <h2 class="section-title">My Location</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Map -->
+                <div class="reveal">
+                    <div class="glass-card p-8 relative overflow-hidden">
+                        <div class="map-grid-lines"></div>
+                        <div class="map-container">
+                            <svg class="map-svg" viewBox="0 0 500 550" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:rgba(224,112,80,0.15)" />
+                                        <stop offset="100%" style="stop-color:rgba(224,112,80,0.03)" />
+                                    </linearGradient>
+                                    <filter id="mapGlow">
+                                        <feGaussianBlur stdDeviation="2" result="blur" />
+                                        <feMerge>
+                                            <feMergeNode in="blur" />
+                                            <feMergeNode in="SourceGraphic" />
+                                        </feMerge>
+                                    </filter>
+                                </defs>
+                                <!-- Simplified India outline -->
+                                <path class="india-outline" d="
+                                    M220,30 L260,25 L290,35 L310,30 L340,40 L360,35
+                                    L380,50 L390,70 L395,90 L400,110 L410,130
+                                    L420,150 L430,170 L435,190 L440,210 L445,230
+                                    L440,250 L435,270 L425,290 L415,310 L400,330
+                                    L385,345 L370,355 L355,370 L340,385 L325,400
+                                    L310,415 L295,430 L280,445 L265,455 L250,470
+                                    L240,480 L235,490 L240,500 L235,510 L225,515
+                                    L215,510 L210,500 L200,490 L190,480
+                                    L175,465 L160,450 L150,435 L135,420
+                                    L120,405 L110,390 L100,375 L90,360
+                                    L80,340 L75,320 L70,300 L65,280
+                                    L60,260 L65,240 L70,220 L80,200
+                                    L90,180 L100,165 L110,150 L120,135
+                                    L130,120 L140,105 L150,90 L160,75
+                                    L170,60 L180,50 L195,40 L210,35 Z
+                                " fill="url(#mapGrad)" filter="url(#mapGlow)" />
+
+                                <!-- State borders (simplified) -->
+                                <path d="M150,150 L250,140 L350,160" stroke="rgba(224,112,80,0.08)" stroke-width="0.5" fill="none" />
+                                <path d="M120,200 L240,190 L380,210" stroke="rgba(224,112,80,0.08)" stroke-width="0.5" fill="none" />
+                                <path d="M100,260 L250,250 L420,270" stroke="rgba(224,112,80,0.08)" stroke-width="0.5" fill="none" />
+                                <path d="M80,320 L250,310 L400,330" stroke="rgba(224,112,80,0.08)" stroke-width="0.5" fill="none" />
+                                <path d="M110,380 L250,370 L370,385" stroke="rgba(224,112,80,0.08)" stroke-width="0.5" fill="none" />
+                                <path d="M250,100 L255,200 L250,300 L245,400" stroke="rgba(224,112,80,0.06)" stroke-width="0.5" fill="none" />
+                                <path d="M180,80 L190,200 L180,350" stroke="rgba(224,112,80,0.06)" stroke-width="0.5" fill="none" />
+                                <path d="M320,60 L330,200 L320,370" stroke="rgba(224,112,80,0.06)" stroke-width="0.5" fill="none" />
+
+                                <!-- Delhi marker glow -->
+                                <circle cx="255" cy="165" r="25" fill="rgba(224,112,80,0.1)">
+                                    <animate attributeName="r" values="15;30;15" dur="3s" repeatCount="indefinite" />
+                                    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="255" cy="165" r="12" fill="rgba(224,112,80,0.15)">
+                                    <animate attributeName="r" values="8;16;8" dur="2s" repeatCount="indefinite" />
+                                </circle>
+
+                                <!-- Delhi dot -->
+                                <circle cx="255" cy="165" r="6" fill="#E07050" stroke="white" stroke-width="2">
+                                    <animate attributeName="r" values="5;7;5" dur="1.5s" repeatCount="indefinite" />
+                                </circle>
+
+                                <!-- City labels -->
+                                <text x="270" y="162" fill="#E07050" font-size="12" font-family="Outfit, sans-serif" font-weight="700">NEW DELHI</text>
+                                <text x="270" y="176" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat, sans-serif">28.6139° N, 77.2090° E</text>
+
+                                <!-- Other city dots -->
+                                <circle cx="325" cy="250" r="3" fill="rgba(224,112,80,0.4)" />
+                                <text x="332" y="253" fill="rgba(255,255,255,0.25)" font-size="7" font-family="Montserrat">Kolkata</text>
+
+                                <circle cx="185" cy="295" r="3" fill="rgba(224,112,80,0.4)" />
+                                <text x="145" y="298" fill="rgba(255,255,255,0.25)" font-size="7" font-family="Montserrat">Mumbai</text>
+
+                                <circle cx="215" cy="400" r="3" fill="rgba(224,112,80,0.4)" />
+                                <text x="222" y="403" fill="rgba(255,255,255,0.25)" font-size="7" font-family="Montserrat">Bangalore</text>
+
+                                <circle cx="260" cy="420" r="3" fill="rgba(224,112,80,0.4)" />
+                                <text x="267" y="423" fill="rgba(255,255,255,0.25)" font-size="7" font-family="Montserrat">Chennai</text>
+
+                                <circle cx="170" cy="185" r="3" fill="rgba(224,112,80,0.4)" />
+                                <text x="130" y="188" fill="rgba(255,255,255,0.25)" font-size="7" font-family="Montserrat">Jaipur</text>
+
+                                <circle cx="340" cy="180" r="3" fill="rgba(224,112,80,0.4)" />
+                                <text x="348" y="183" fill="rgba(255,255,255,0.25)" font-size="7" font-family="Montserrat">Patna</text>
+
+                                <!-- Connection lines from Delhi -->
+                                <line x1="255" y1="165" x2="325" y2="250" stroke="rgba(224,112,80,0.08)" stroke-width="0.5" stroke-dasharray="4 4" />
+                                <line x1="255" y1="165" x2="185" y2="295" stroke="rgba(224,112,80,0.08)" stroke-width="0.5" stroke-dasharray="4 4" />
+                                <line x1="255" y1="165" x2="215" y2="400" stroke="rgba(224,112,80,0.08)" stroke-width="0.5" stroke-dasharray="4 4" />
+                                <line x1="255" y1="165" x2="260" y2="420" stroke="rgba(224,112,80,0.08)" stroke-width="0.5" stroke-dasharray="4 4" />
+                            </svg>
+
+                            <!-- Radar ping on Delhi -->
+                            <div class="map-radar" style="top: 30%; left: 51%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Info -->
+                <div class="reveal">
+                    <div class="space-y-6">
+                        <div class="glass-card p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-terracotta-500/10 flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-terracotta-500 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-white">Based In</h4>
+                                    <p class="text-white/60 text-sm">New Delhi, India 🇮🇳</p>
+                                </div>
+                            </div>
+                            <p class="text-white/50 text-sm leading-relaxed">
+                                Operating from the heart of India's capital city. 
+                                Available for remote projects worldwide and local 
+                                meetups in Delhi NCR region.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-terracotta-500/10 flex items-center justify-center">
+                                    <i class="fas fa-globe-asia text-terracotta-500 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-white">Work Timezone</h4>
+                                    <p class="text-white/60 text-sm">IST (UTC +5:30)</p>
+                                </div>
+                            </div>
+                            <p class="text-white/50 text-sm leading-relaxed">
+                                I work flexible hours and can accommodate clients 
+                                across all timezones. Usually available 10 AM - 2 AM IST.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-terracotta-500/10 flex items-center justify-center">
+                                    <i class="fas fa-plane text-terracotta-500 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-white">Serving Clients In</h4>
+                                    <p class="text-white/60 text-sm">20+ Countries</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="px-2 py-1 bg-terracotta-500/10 text-terracotta-500 rounded-full text-xs">🇮🇳 India</span>
+                                <span class="px-2 py-1 bg-terracotta-500/10 text-terracotta-500 rounded-full text-xs">🇺🇸 USA</span>
+                                <span class="px-2 py-1 bg-terracotta-500/10 text-terracotta-500 rounded-full text-xs">🇬🇧 UK</span>
+                                <span class="px-2 py-1 bg-terracotta-500/10 text-terracotta-500 rounded-full text-xs">🇦🇪 UAE</span>
+                                <span class="px-2 py-1 bg-terracotta-500/10 text-terracotta-500 rounded-full text-xs">🇩🇪 Germany</span>
+                                <span class="px-2 py-1 bg-terracotta-500/10 text-terracotta-500 rounded-full text-xs">🇨🇦 Canada</span>
+                                <span class="px-2 py-1 bg-terracotta-500/10 text-terracotta-500 rounded-full text-xs">🇦🇺 Australia</span>
+                                <span class="px-2 py-1 bg-terracotta-500/10 text-terracotta-500 rounded-full text-xs">🇸🇬 Singapore</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center">
+                                    <i class="fas fa-circle text-green-500 text-xs animate-pulse"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-green-400">Currently Available</h4>
+                                    <p class="text-white/60 text-sm">Open for new projects & collaborations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -5049,6 +5908,357 @@
             }
         }, 0);
     });
+    /* ========================================= */
+    /* 3D SNAKE TIMELINE ANIMATION               */
+    /* ========================================= */
+    (function() {
+        const snakeHead = document.getElementById('snake-head');
+        const timelineEl = document.querySelector('.timeline');
+        if (!snakeHead || !timelineEl) return;
+
+        const timelineSnake = document.getElementById('timeline-snake');
+        let snakeY = 0;
+        let targetY = 0;
+        let animationId;
+
+        function updateSnakePosition() {
+            const timelineRect = timelineEl.getBoundingClientRect();
+            const timelineTop = timelineRect.top;
+            const timelineHeight = timelineRect.height;
+            const viewportCenter = window.innerHeight / 2;
+
+            // Calculate how far down the timeline the viewport center is
+            const progress = (viewportCenter - timelineTop) / timelineHeight;
+            const clampedProgress = Math.max(0, Math.min(1, progress));
+
+            targetY = clampedProgress * timelineHeight;
+
+            // Smooth lerp
+            snakeY += (targetY - snakeY) * 0.08;
+
+            if (snakeHead) {
+                snakeHead.style.top = snakeY + 'px';
+
+                // Add wobble effect based on scroll speed
+                const wobble = Math.sin(Date.now() * 0.003) * 3;
+                snakeHead.style.transform = `translateX(calc(-50% + ${wobble}px))`;
+            }
+
+            // Spawn particles occasionally
+            if (Math.random() < 0.03 && clampedProgress > 0.05 && clampedProgress < 0.95) {
+                spawnSnakeParticle(snakeY);
+            }
+
+            animationId = requestAnimationFrame(updateSnakePosition);
+        }
+
+        function spawnSnakeParticle(y) {
+            const particle = document.createElement('div');
+            particle.className = 'snake-particle';
+            const offsetX = (Math.random() - 0.5) * 20;
+            particle.style.cssText = `
+                left: calc(50% + ${offsetX}px);
+                top: ${y}px;
+                opacity: 0.6;
+                animation: snakeParticleFade 1s ease forwards;
+            `;
+            timelineSnake.appendChild(particle);
+            setTimeout(() => particle.remove(), 1000);
+        }
+
+        // Add particle animation
+        const particleStyle = document.createElement('style');
+        particleStyle.textContent = `
+            @keyframes snakeParticleFade {
+                0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+                100% { transform: translate(${Math.random() > 0.5 ? '' : '-'}${10 + Math.random() * 15}px, -20px) scale(0); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(particleStyle);
+
+        // Start animation
+        updateSnakePosition();
+
+        // Cleanup on page hide
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                cancelAnimationFrame(animationId);
+            } else {
+                updateSnakePosition();
+            }
+        });
+    })();
+
+    /* ========================================= */
+    /* TIMELINE ITEMS SCROLL ANIMATION           */
+    /* ========================================= */
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    timelineItems.forEach(item => timelineObserver.observe(item));
+
+    /* ========================================= */
+    /* ENHANCED MOBILE TOUCH EFFECTS             */
+    /* ========================================= */
+    if ('ontouchstart' in window) {
+        // Disable hover-dependent features on touch devices
+        document.body.classList.add('touch-device');
+
+        // Add touch-friendly card interactions
+        document.querySelectorAll('.glass-card, .project-card, .skill-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+                this.style.transition = 'transform 0.2s ease';
+            }, { passive: true });
+
+            card.addEventListener('touchend', function() {
+                this.style.transform = '';
+            }, { passive: true });
+        });
+
+        // Better scroll performance on mobile
+        document.querySelectorAll('.marquee-track').forEach(track => {
+            track.style.willChange = 'transform';
+        });
+    }
+
+    /* ========================================= */
+    /* MOBILE NAV SCROLL BEHAVIOR               */
+    /* ========================================= */
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('nav');
+    
+    window.addEventListener('scroll', throttle(() => {
+        if (window.innerWidth > 768) return;
+        
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down - hide nav
+            if (navbar) {
+                navbar.style.transform = 'translateY(-100%)';
+                navbar.style.transition = 'transform 0.3s ease';
+            }
+        } else {
+            // Scrolling up - show nav
+            if (navbar) {
+                navbar.style.transform = 'translateY(0)';
+            }
+        }
+        lastScrollTop = scrollTop;
+    }, 100));
+
+    /* ========================================= */
+    /* ORIENTATION CHANGE HANDLER                */
+    /* ========================================= */
+    window.addEventListener('orientationchange', () => {
+        // Recalculate layouts after orientation change
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+            updateScrollProgress();
+        }, 300);
+    });
+
+    /* ========================================= */
+    /* WEB AUDIO SYNTHESIZER SOUND EFFECTS       */
+    /* ========================================= */
+    const SoundFX = (function() {
+        let audioCtx = null;
+        let isMuted = localStorage.getItem('soundMuted') === 'true';
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioCtx = new AudioContext();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playTone(freq, type, duration, vol = 0.05) {
+            if (isMuted) return;
+            initAudio();
+            if (!audioCtx) return;
+
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        return {
+            click: () => playTone(600, 'sine', 0.08, 0.04),
+            hover: () => playTone(400, 'triangle', 0.04, 0.015),
+            toggle: () => {
+                isMuted = !isMuted;
+                localStorage.setItem('soundMuted', isMuted);
+                const btn = document.getElementById('sound-toggle-btn');
+                if (btn) {
+                    btn.classList.toggle('muted', isMuted);
+                    btn.innerHTML = isMuted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+                }
+                showToast(isMuted ? 'Muted 🔇' : 'Sound On 🔊', isMuted ? 'Sound effects disabled' : 'UI sound effects enabled');
+            },
+            isMuted: () => isMuted
+        };
+    })();
+
+    // Attach sound effects to interactive elements
+    document.querySelectorAll('.btn-primary, .btn-outline, .nav-link, .tab-btn, .chat-quick-btn').forEach(el => {
+        el.addEventListener('mouseenter', () => SoundFX.hover());
+        el.addEventListener('click', () => SoundFX.click());
+    });
+
+    /* ========================================= */
+    /* COMMAND PALETTE LOGIC                     */
+    /* ========================================= */
+    const cmdPalette = (function() {
+        const backdrop = document.getElementById('cmd-palette-backdrop');
+        const input = document.getElementById('cmd-search-input');
+        const results = document.getElementById('cmd-results-list');
+        let isOpen = false;
+
+        const items = [
+            { icon: 'fas fa-home', title: 'Go to Home', section: 'hero', shortcut: '⌘H' },
+            { icon: 'fas fa-user', title: 'About SUDEEPBOTS', section: 'about', shortcut: '⌘A' },
+            { icon: 'fas fa-code', title: 'View Skills', section: 'skills', shortcut: '⌘S' },
+            { icon: 'fas fa-briefcase', title: 'View Experience', section: 'experience', shortcut: '⌘E' },
+            { icon: 'fas fa-folder-open', title: 'Browse Projects', section: 'projects', shortcut: '⌘P' },
+            { icon: 'fas fa-cogs', title: 'View Services & Pricing', section: 'services', shortcut: '⌘V' },
+            { icon: 'fas fa-map-marker-alt', title: 'Location (New Delhi)', section: 'location', shortcut: '⌘L' },
+            { icon: 'fas fa-envelope', title: 'Contact Me', section: 'contact', shortcut: '⌘C' },
+            { icon: 'fas fa-comment-dots', title: 'Open AI Assistant Chatbot', action: () => toggleChatbot(), shortcut: '⌘B' },
+            { icon: 'fas fa-volume-up', title: 'Toggle UI Sound Effects', action: () => SoundFX.toggle(), shortcut: '⌘M' }
+        ];
+
+        function renderItems(filterText = '') {
+            if (!results) return;
+            results.innerHTML = '';
+            const filtered = items.filter(item => item.title.toLowerCase().includes(filterText.toLowerCase()));
+
+            if (filtered.length === 0) {
+                results.innerHTML = '<div style="padding: 1.5rem; text-align: center; color: rgba(255,255,255,0.4);">No results found</div>';
+                return;
+            }
+
+            filtered.forEach((item, index) => {
+                const el = document.createElement('a');
+                el.className = `cmd-item ${index === 0 ? 'selected' : ''}`;
+                el.href = item.section ? `#${item.section}` : '#';
+                el.innerHTML = `
+                    <i class="${item.icon}"></i>
+                    <span>${item.title}</span>
+                    <span class="cmd-item-shortcut">${item.shortcut}</span>
+                `;
+                el.addEventListener('click', (e) => {
+                    if (item.action) {
+                        e.preventDefault();
+                        item.action();
+                    }
+                    close();
+                });
+                results.appendChild(el);
+            });
+        }
+
+        function open() {
+            if (!backdrop) return;
+            isOpen = true;
+            backdrop.classList.add('active');
+            renderItems();
+            setTimeout(() => input?.focus(), 50);
+        }
+
+        function close() {
+            if (!backdrop) return;
+            isOpen = false;
+            backdrop.classList.remove('active');
+            if (input) input.value = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                isOpen ? close() : open();
+            } else if (e.key === 'Escape' && isOpen) {
+                close();
+            }
+        });
+
+        if (input) {
+            input.addEventListener('input', (e) => renderItems(e.target.value));
+        }
+
+        if (backdrop) {
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop) close();
+            });
+        }
+
+        return { open, close };
+    })();
+
+    /* ========================================= */
+    /* PREFERS REDUCED MOTION                    */
+    /* ========================================= */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReducedMotion.matches) {
+        // Disable heavy animations for accessibility
+        document.querySelectorAll('.marquee-track').forEach(track => {
+            track.style.animation = 'none';
+        });
+        document.querySelectorAll('.snake-path').forEach(path => {
+            path.style.animation = 'none';
+        });
+        document.querySelectorAll('.map-radar').forEach(el => {
+            el.style.animation = 'none';
+        });
+    }
     </script>
+
+    <!-- ========================================= -->
+    <!-- FLOATING SOUND TOGGLE BUTTON              -->
+    <!-- ========================================= -->
+    <button class="sound-toggle-btn" id="sound-toggle-btn" onclick="SoundFX.toggle()" title="Toggle Sound Effects">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+    <!-- ========================================= -->
+    <!-- COMMAND PALETTE MODAL (CTRL + K)          -->
+    <!-- ========================================= -->
+    <div class="cmd-palette-backdrop" id="cmd-palette-backdrop">
+        <div class="cmd-palette-modal">
+            <div class="cmd-search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" class="cmd-search-input" id="cmd-search-input" placeholder="Type a command or search section..." autocomplete="off">
+            </div>
+            <div class="cmd-results-list" id="cmd-results-list"></div>
+            <div class="cmd-footer">
+                <span><kbd class="px-1 py-0.5 bg-white/10 rounded">ESC</kbd> to exit</span>
+                <span><kbd class="px-1 py-0.5 bg-white/10 rounded">Ctrl+K</kbd> Command Palette</span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
