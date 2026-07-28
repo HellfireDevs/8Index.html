@@ -8756,7 +8756,7 @@ $ _
     /* MOBILE NAV SCROLL BEHAVIOR               */
     /* ========================================= */
     let lastScrollTop = 0;
-    const navbar = document.querySelector('nav');
+    const mobileNavEl = document.querySelector('nav');
     
     window.addEventListener('scroll', throttle(() => {
         if (window.innerWidth > 768) return;
@@ -8775,7 +8775,7 @@ $ _
         } else {
             // Scrolling up - show nav
             if (navbar) {
-                navbar.style.transform = 'translateY(0)';
+                if (mobileNavEl) mobileNavEl.style.transform = 'translateY(0)';
             }
         }
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
