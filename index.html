@@ -8042,7 +8042,7 @@ $ _
         body.scrollTop = body.scrollHeight;
     }
 
-    function sendChatMessage() {
+    window.sendChatMessage = function() {
         const input = document.getElementById('chatbot-input');
         const message = input.value.trim();
         if (!message) return;
@@ -8067,7 +8067,7 @@ $ _
         }, 800 + Math.random() * 700);
     }
 
-    function sendQuickMessage(message) {
+    window.sendQuickMessage = function(message) {
         const input = document.getElementById('chatbot-input');
         input.value = message;
         sendChatMessage();
