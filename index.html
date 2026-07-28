@@ -7107,6 +7107,8 @@ $ _
     <!-- ========================================= -->
     <!-- ========================================= -->
     <script>
+(function() {
+
     /* ========================================= */
     /* LOADER                                    */
     /* ========================================= */
@@ -8947,8 +8949,8 @@ $ _
     /* ========================================= */
     /* PREFERS REDUCED MOTION                    */
     /* ========================================= */
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (prefersReducedMotion.matches) {
+    const prefersReducedMotionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReducedMotionMedia.matches) {
         // Disable heavy animations for accessibility
         document.querySelectorAll('.marquee-track').forEach(track => {
             track.style.animation = 'none';
@@ -8979,7 +8981,9 @@ $ _
             cmdPalette.open();
         });
     }
-    </script>
+    
+})();
+</script>
 
     <!-- ========================================= -->
     <!-- FLOATING SOUND TOGGLE BUTTON              -->
@@ -9230,6 +9234,8 @@ $ _
 
     <!-- NEW INTERACTIVE SCRIPTS FOR EXTENDED FEATURES -->
     <script>
+(function() {
+
     document.addEventListener('DOMContentLoaded', () => {
         const runBtn = document.getElementById('run-bot-simulation');
         const logBox = document.getElementById('bot-sim-log');
@@ -9269,7 +9275,9 @@ $ _
             });
         }
     });
-    </script>
+    
+})();
+</script>
     <!-- ================================================================= -->
     <!-- ADVANCED ANIMATION ENGINE & STYLING MATRIX REGISTRY               -->
     <!-- ================================================================= -->
@@ -9317,6 +9325,8 @@ $ _
 
     <!-- NEW INTERACTIVE SCRIPTS FOR CANVAS SIMULATOR -->
     <script>
+(function() {
+
     document.addEventListener('DOMContentLoaded', () => {
         const canvas = document.getElementById('particle-matrix-canvas');
         if (!canvas) return;
@@ -9376,7 +9386,9 @@ $ _
         }
         draw();
     });
-    </script>
+    
+})();
+</script>
     <!-- ================================================================= -->
     <!-- EXTENDED GPU SHADER MAPPING & HIGH-DENSITY CSS ENGINE MATRIX       -->
     <!-- ================================================================= -->
