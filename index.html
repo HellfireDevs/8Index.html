@@ -7110,15 +7110,18 @@ $ _
     /* ========================================= */
     /* LOADER                                    */
     /* ========================================= */
-    window.addEventListener('load', () => {
+    function hidePreloader() {
         const loader = document.getElementById('loader');
-        setTimeout(() => {
+        if (loader && !loader.classList.contains('hidden')) {
             loader.classList.add('hidden');
             document.body.style.overflow = 'auto';
-            initRevealAnimations();
-            animateCounters();
-        }, 1500);
-    });
+            if (typeof initRevealAnimations === 'function') initRevealAnimations();
+            if (typeof animateCounters === 'function') animateCounters();
+        }
+    }
+    window.addEventListener('load', hidePreloader);
+    document.addEventListener('DOMContentLoaded', () => { setTimeout(hidePreloader, 1000); });
+    setTimeout(hidePreloader, 3000);
 
     /* ========================================= */
     /* CUSTOM CURSOR                             */
