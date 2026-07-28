@@ -26,7 +26,42 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+        <script>
+    /* ========================================= */
+    /* GLOBAL UTILITIES & EVENT HANDLERS         */
+    /* ========================================= */
+    window.isTouchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+    var isTouchDevice = window.isTouchDevice;
+
+    window.acceptCookies = function() {
+        const banner = document.getElementById('cookie-banner');
+        if (banner) banner.classList.add('hidden');
+        localStorage.setItem('cookies_accepted', 'true');
+    };
+
+    window.toggleFaq = function(button) {
+        const item = button.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const icon = button.querySelector('i');
+        
+        if (item.classList.contains('active')) {
+            item.classList.remove('active');
+            answer.style.maxHeight = null;
+            icon.style.transform = 'rotate(0deg)';
+        } else {
+            document.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('active');
+                const a = i.querySelector('.faq-answer');
+                const ic = i.querySelector('.faq-question i');
+                if (a) a.style.maxHeight = null;
+                if (ic) ic.style.transform = 'rotate(0deg)';
+            });
+            item.classList.add('active');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            icon.style.transform = 'rotate(180deg)';
+        }
+    };
+
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -160,11 +195,7 @@
             background: linear-gradient(180deg, #FF7A4F, #E07050);
         }
         
-        /* ========================================= */
-        /* TOUCH DEVICE CHECK                        */
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
-
-    /* LOADER                                    */
+            /* LOADER                                    */
         /* ========================================= */
         .loader {
             position: fixed;
